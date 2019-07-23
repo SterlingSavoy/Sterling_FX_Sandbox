@@ -28,6 +28,7 @@ public class FXShowcaseScript : MonoBehaviour
     public float timeSinceLastShot;
 
     [Header("Camera Parameters")]
+    public Vector3 shootCameraOffset;
     public Vector3 followCameraOffset;
     public Vector3 impactCameraOffset;
 
@@ -120,6 +121,14 @@ public class FXShowcaseScript : MonoBehaviour
                 }
                 break;
 
+            case ShowCaseType.shoot:
+                timeSinceLastShot += Time.deltaTime;
+                if (timeSinceLastShot >= currentBulletType.MuzzleFlashLifeSpan)
+                {
+                    timeSinceLastShot = 0;
+                    StartCoroutine(DeathTimer(InstantiateParticle(), currentBulletType.MuzzleFlashLifeSpan));
+                }
+                break;
         }
     }
 
@@ -203,6 +212,13 @@ public class FXShowcaseScript : MonoBehaviour
                 StartCoroutine(DeathTimer(InstantiateParticle(), currentBulletType.ImpactMarkLifeSpan));
                 timeSinceLastShot = 0;
                 mainCamera.transform.position = impactCameraOffset;
+                break;
+
+            case ShowCaseType.shoot:
+                Wall.SetActive(true);
+                StartCoroutine(DeathTimer(InstantiateParticle(), currentBulletType.MuzzleFlashLifeSpan));
+                timeSinceLastShot = 0;
+                mainCamera.transform.position = shootCameraOffset;
                 break;
         }
     }

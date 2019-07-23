@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: DevFlame
   m_EditorClassIdentifier: 
   _particleName: Flame Particle
-  _bulletMuzzleFlash: {fileID: 6325827795879052898, guid: a242b15afd40220468d3bac073a84d62,
+  _bulletMuzzleFlash: {fileID: 1237276787194864, guid: 05a4840f660493f48996d73c85d4df80,
     type: 3}
   _bulletProjectile: {fileID: 9168516123458454714, guid: b1b46519b4a0c53429885f249684f059,
     type: 3}
   _bulletImpactMark: {fileID: 4103646234130335017, guid: ea98f8a4548c89f4abb172de69227c6e,
     type: 3}
   _impactMarkLifeSpan: 0.8
-  _MuzleFlashMarkLifeSpan: 5
+  _MuzleFlashMarkLifeSpan: 0.8
   _bulletSpeed: 500
