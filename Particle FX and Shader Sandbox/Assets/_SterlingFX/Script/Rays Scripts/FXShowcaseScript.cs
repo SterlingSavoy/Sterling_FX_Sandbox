@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,49 +9,37 @@ public class FXShowcaseScript : MonoBehaviour
     {
         shoot,
         follow,
-        impact
-    }
-
-    public enum Element
-    {
-        flame,
-        ice,
-        shock
+        impact,
+        all
     }
 
     private ShowCaseType previousMode;
     public ShowCaseType currentMode;
 
-    private Element previousElement;
-    public Element currentElement;
+    private ParticleTemplate previousBulletType;
 
+    [ReadOnlyField]
+    public int currentBulletIndex;
+    [ReadOnlyField]
+    public ParticleTemplate currentBulletType;
 
-    public float bulletSpeed;
+    //public float timeBetweenShots;
+    [ReadOnlyField]
+    public float timeSinceLastShot;
 
     [Header("Camera Parameters")]
     public Vector3 followCameraOffset;
+    public Vector3 impactCameraOffset;
 
-    [Header("Bullet Muzzle Flash")]
-    public GameObject FlameMuzzleFlashPrefab;
-    public GameObject IceMuzzleFlashPrefab;
-    public GameObject ShockMuzzleFlashPrefab;
+    [Header("Bullet Data")]
+    public List<ParticleTemplate> BulletTemplates;
 
-    [Header("Bullet Prefabs")]
-    public GameObject FlameBulletPrefab;
-    public GameObject IceBulletPrefab;
-    public GameObject ShockBulletPrefab;
-
-    [Header("Bullet Impact Prefabs")]
-    public GameObject FlameImpactPrefab;
-    public GameObject IceImpactPrefab;
-    public GameObject ShockImpactPrefab;
-
-
+    public GameObject Wall;
 
     [ReadOnlyField]
     public Camera mainCamera;
     [ReadOnlyField]
-    public GameObject BulletInstance;
+    public GameObject particleInstance;
 
 
 
@@ -59,58 +48,143 @@ public class FXShowcaseScript : MonoBehaviour
     {
         mainCamera = Camera.main;
         previousMode = currentMode;
-        previousElement = currentElement;
+
+        currentBulletType = BulletTemplates[currentBulletIndex];
+
+        previousBulletType = currentBulletType;
 
         InitializeDemo();
-
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentBulletIndex++;
+
+            if (currentBulletIndex >= BulletTemplates.Count)
+            {
+                currentBulletIndex = 0;
+            }
+
+            currentBulletType = BulletTemplates[currentBulletIndex];
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentBulletIndex--;
+
+            if (currentBulletIndex < 0)
+            {
+                currentBulletIndex = BulletTemplates.Count - 1;
+            }
+
+            currentBulletType = BulletTemplates[currentBulletIndex];
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            currentMode = NextShowCaseType();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            currentMode = PreviousShowCaseType();
+        }
+        
+
         if (currentMode != previousMode)
         {
             Debug.Log("Mode Changed");
+            Destroy(particleInstance);
+            InitializeDemo();
+            previousMode = currentMode;
         }
 
-        if (currentElement != previousElement)
+        if (currentBulletType != previousBulletType)
         {
-            Destroy(BulletInstance);
+            Destroy(particleInstance);
             InitializeDemo();
-            previousElement = currentElement;
+            previousBulletType = currentBulletType;
         }
 
         switch (currentMode)
         {
             case ShowCaseType.follow:
-                mainCamera.transform.position = BulletInstance.transform.position + followCameraOffset;
+                mainCamera.transform.position = particleInstance.transform.position + followCameraOffset;
                 break;
+            case ShowCaseType.impact:
+                timeSinceLastShot += Time.deltaTime;
+                if (timeSinceLastShot >= currentBulletType.ImpactMarkLifeSpan)
+                {
+                    timeSinceLastShot = 0;
+                    StartCoroutine(DeathTimer(InstantiateParticle(), currentBulletType.ImpactMarkLifeSpan));
+                }
+                break;
+
         }
     }
 
-
-
-    private GameObject InstantiateBullet()
+    private ShowCaseType NextShowCaseType()
     {
-        switch (currentElement)
+        switch (currentMode)
         {
-            case Element.flame:
-                BulletInstance = Instantiate(FlameBulletPrefab);
+            case ShowCaseType.shoot:
+                return ShowCaseType.follow;
+
+            case ShowCaseType.follow:
+                return ShowCaseType.impact;
+
+            case ShowCaseType.impact:
+                return ShowCaseType.shoot;
+
+            default:
+            return ShowCaseType.follow;      
+        }
+    }
+
+    private ShowCaseType PreviousShowCaseType()
+    {
+        switch (currentMode)
+        {
+            case ShowCaseType.shoot:
+                return ShowCaseType.impact;
+
+            case ShowCaseType.follow:
+                return ShowCaseType.shoot;
+
+            case ShowCaseType.impact:
+                return ShowCaseType.follow;
+
+            default:
+                return ShowCaseType.follow;
+        }
+    }
+
+    private GameObject InstantiateParticle()
+    {
+        switch (currentMode)
+        {
+            case ShowCaseType.shoot:
+                particleInstance = Instantiate(currentBulletType.MuzzleFlash);
                 break;
 
-            case Element.ice:
-                BulletInstance = Instantiate(IceBulletPrefab);
+            case ShowCaseType.follow:
+                particleInstance = Instantiate(currentBulletType.BulletProjectile);
                 break;
 
-            case Element.shock:
-                BulletInstance = Instantiate(ShockBulletPrefab);
-                
+            case ShowCaseType.impact:
+                particleInstance = Instantiate(currentBulletType.BulletImpactMark);
+                break;
+
+            case ShowCaseType.all:
+                particleInstance = Instantiate(currentBulletType.MuzzleFlash);
+                break;
+
+            default:
+                particleInstance = Instantiate(currentBulletType.BulletProjectile);
                 break;
         }
-
-        return BulletInstance;
+        
+        return particleInstance;
     }
 
     private void InitializeDemo()
@@ -118,11 +192,24 @@ public class FXShowcaseScript : MonoBehaviour
         switch (currentMode)
         {
             case ShowCaseType.follow:
-                InstantiateBullet().GetComponent<Rigidbody>().AddForce(Vector3.forward * bulletSpeed);
-                mainCamera.transform.position = BulletInstance.transform.position + followCameraOffset;
+                Wall.SetActive(false);
+                InstantiateParticle().GetComponent<Rigidbody>().AddForce(Vector3.forward * currentBulletType.BulletSpeed);
+                mainCamera.transform.position = particleInstance.transform.position + followCameraOffset;
                 break;
 
+            case ShowCaseType.impact:
+                Wall.SetActive(true);
+
+                StartCoroutine(DeathTimer(InstantiateParticle(), currentBulletType.ImpactMarkLifeSpan));
+                timeSinceLastShot = 0;
+                mainCamera.transform.position = impactCameraOffset;
+                break;
         }
     }
 
+    IEnumerator DeathTimer(GameObject particle, float lifespan)
+    {
+        yield return new WaitForSeconds(lifespan);
+        Destroy(particle);
+    }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751cf094a1058cc4e80573d8665822d0, type: 3}
+  m_Name: DevFlame
+  m_EditorClassIdentifier: 
+  _particleName: Flame Particle
+  _bulletMuzzleFlash: {fileID: 6325827795879052898, guid: a242b15afd40220468d3bac073a84d62,
+    type: 3}
+  _bulletProjectile: {fileID: 9168516123458454714, guid: b1b46519b4a0c53429885f249684f059,
+    type: 3}
+  _bulletImpactMark: {fileID: 4103646234130335017, guid: ea98f8a4548c89f4abb172de69227c6e,
+    type: 3}
+  _impactMarkLifeSpan: 0.8
+  _MuzleFlashMarkLifeSpan: 5
+  _bulletSpeed: 500
