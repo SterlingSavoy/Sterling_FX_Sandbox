@@ -29,12 +29,12 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.75
-        value: {x: 0, y: 5, z: 10}
-        inSlope: {x: 0, y: 0, z: 2.322016}
-        outSlope: {x: 0, y: 0, z: 2.322016}
+        value: {x: 0, y: 5, z: 37.53}
+        inSlope: {x: 0, y: 0, z: 20.54363}
+        outSlope: {x: 0, y: 0, z: 20.54363}
         tangentMode: 0
         weightedMode: 0
-        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.10429788}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -47,37 +47,65 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5833333
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       - serializedVersion: 3
         time: 0.75
         value: 0
-        inSlope: -11.999999
-        outSlope: -11.999999
-        tangentMode: 34
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: material._Glow_Intensity
-    path: Trail
-    classID: 96
+    attribute: m_IsActive
+    path: Flame Projectile
+    classID: 1
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.71666664
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Flame Impact
+    classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -95,11 +123,18 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1940499083
-      attribute: 2239061391
+      path: 1758679351
+      attribute: 2086281974
       script: {fileID: 0}
-      typeID: 96
-      customType: 22
+      typeID: 1
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1218259692
+      attribute: 2086281974
+      script: {fileID: 0}
+      typeID: 1
+      customType: 0
       isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
@@ -107,7 +142,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.75
+    m_StopTime: 2
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -193,12 +228,12 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.75
-        value: 10
-        inSlope: 2.322016
-        outSlope: 2.322016
+        value: 37.53
+        inSlope: 20.54363
+        outSlope: 20.54363
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.10429788
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -212,37 +247,65 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5833333
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       - serializedVersion: 3
         time: 0.75
         value: 0
-        inSlope: -11.999999
-        outSlope: -11.999999
-        tangentMode: 34
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: material._Glow_Intensity
-    path: Trail
-    classID: 96
+    attribute: m_IsActive
+    path: Flame Projectile
+    classID: 1
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.71666664
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Flame Impact
+    classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 1

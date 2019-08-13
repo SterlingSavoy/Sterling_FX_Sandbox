@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: c363d6d0c1053ee418fb50059e22c298
+guid: 467f981b38f2b904ba7a00fbe540757b
 TextureImporter:
-  fileIDToRecycleName: {}
+  internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -48,8 +48,8 @@ TextureImporter:
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaUsage: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 0
   textureShape: 1
@@ -69,6 +69,17 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
@@ -76,10 +87,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

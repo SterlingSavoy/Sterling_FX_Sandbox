@@ -21,4 +21,4 @@ MonoBehaviour:
     type: 3}
   _impactMarkLifeSpan: 0.8
   _MuzleFlashMarkLifeSpan: 0.8
-  _bulletSpeed: 50
+  _bulletSpeed: 500
